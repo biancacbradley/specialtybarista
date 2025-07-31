@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "allowJs": true,
+      "noEmit": true,
+      "skipLibCheck": true,
+      "esModuleInterop": true
+    },
+    "include": ["**/*"]
+  }
