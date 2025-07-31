@@ -1,9 +1,13 @@
 {
     "compilerOptions": {
-      "allowJs": true,
-      "noEmit": true,
+      "target": "es2017",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
       "skipLibCheck": true,
-      "esModuleInterop": true
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./build"
     },
-    "include": ["**/*"]
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
   }
