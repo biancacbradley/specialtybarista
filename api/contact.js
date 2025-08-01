@@ -62,7 +62,7 @@ export default async function handler(req, res) {
     // Send email
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: 'biancacbradley@gmail.com', // Recipient email
+      to: 'thespecialtybarista@gmail.com', // Recipient email
       subject: subject,
       html: emailBody,
       replyTo: email, // Allow replying directly to the sender

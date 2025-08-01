@@ -75,58 +75,87 @@ function initializeContactForm() {
     
     // Handle form submission
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            submitBtn.style.backgroundColor = '#007cba';
+            
             const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const interest = formData.get('interest');
-            const message = formData.get('message');
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                interest: formData.get('interest'),
+                message: formData.get('message')
+            };
             
-            // Create email subject based on selected interest
-            let subject = 'Contact Form Inquiry';
-            if (interest) {
-                subject = `${interest} - Inquiry from ${name}`;
-            } else {
-                subject = `Contact Inquiry from ${name}`;
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showFormSuccess('Message sent successfully!');
+                    this.reset(); // Clear the form
+                    // Reset interest buttons
+                    document.querySelectorAll('.interest-btn').forEach(btn => btn.classList.remove('active'));
+                    document.getElementById('selectedInterest').value = '';
+                } else {
+                    throw new Error(result.error || 'Failed to send message');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showFormError('Failed to send message. Please try again.');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.backgroundColor = '#FAFAFA';
             }
-            
-            // Create email body
-            let emailBody = `Name: ${name}\n`;
-            emailBody += `Email: ${email}\n`;
-            if (phone) {
-                emailBody += `Phone: ${phone}\n`;
-            }
-            if (interest) {
-                emailBody += `Interest: ${interest}\n`;
-            }
-            emailBody += `\nMessage:\n${message}`;
-            
-            // Create mailto link
-            const mailtoLink = `mailto:biancacbradley@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show success message (optional)
-            showFormSuccess();
         });
     }
 }
 
 // Show form success message
-function showFormSuccess() {
+function showFormSuccess(message = 'Thank you! Message sent successfully.') {
     const submitBtn = document.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
     
-    submitBtn.textContent = 'Thank you! Email client opened.';
+    submitBtn.textContent = message;
     submitBtn.style.backgroundColor = '#4CAF50';
+    submitBtn.disabled = true;
     
     setTimeout(() => {
         submitBtn.textContent = originalText;
         submitBtn.style.backgroundColor = '#FAFAFA';
+        submitBtn.disabled = false;
+    }, 3000);
+}
+
+// Show form error message
+function showFormError(message = 'Failed to send message. Please try again.') {
+    const submitBtn = document.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = message;
+    submitBtn.style.backgroundColor = '#f44336';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.style.backgroundColor = '#FAFAFA';
+        submitBtn.disabled = false;
     }, 3000);
 }
 
