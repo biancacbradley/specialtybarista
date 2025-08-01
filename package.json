@@ -4,11 +4,9 @@
   "description": "Specialty Barista Coffee Training Website",
   "private": true,
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
+    "start": "python -m http.server 8000",
+    "serve": "python -m http.server 8000"
+  },
   "keywords": [
     "coffee",
     "barista",
@@ -16,9 +14,5 @@
     "specialty"
   ],
   "author": "Specialty Barista",
-  "license": "MIT",
-  "devDependencies": {
-    "@vercel/ncc": "^0.38.3",
-    "typescript": "^5.9.2"
-  }
+  "license": "MIT"
 }
