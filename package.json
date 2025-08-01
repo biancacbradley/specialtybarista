@@ -4,9 +4,11 @@
   "description": "Specialty Barista Coffee Training Website",
   "private": true,
   "scripts": {
-    "build": "echo 'Static website - no build required'",
-    "start": "echo 'Static website - serve index.html'"
-  },
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject"
+},
   "keywords": [
     "coffee",
     "barista",
