@@ -282,7 +282,7 @@ html {
 
 .contact-subtitle {
     font-family: 'Inter', sans-serif;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 400;
     color: rgba(146, 146, 146, 0.8);
     line-height: 1.5;
@@ -292,7 +292,7 @@ html {
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     text-align: left;
 }
 
@@ -469,6 +469,17 @@ html {
     margin-bottom: 2rem;
 }
 
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.footer0credit {
+    text-align: center;
+}
+
 .footer-logo h2 {
     font-family: 'Krona One', sans-serif;
     font-size: 4rem;
@@ -512,11 +523,7 @@ html {
     width: 100%;
 }
 
-.footer-bottom {
-    max-width: 1440px;
-    margin: 0 auto;
-    text-align: right;
-}
+
 
 .footer-credit {
     font-family: 'Inter', sans-serif;
@@ -549,6 +556,10 @@ html {
         text-align: center;
     }
     
+    .footer-right {
+        align-items: center;
+    }
+    
     .footer-logo h2 {
         font-size: 1.5rem;
     }
@@ -557,7 +568,7 @@ html {
         gap: 1.5rem;
     }
     
-    .footer-bottom {
+    .footer0credit {
         text-align: center;
     }
 }
@@ -565,6 +576,10 @@ html {
 @media (max-width: 480px) {
     .footer {
         padding: 2.5rem 1rem 1rem 1rem;
+    }
+    
+    .footer-right {
+        align-items: center;
     }
     
     .footer-nav {
