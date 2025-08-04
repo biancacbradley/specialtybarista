@@ -208,10 +208,18 @@ body {
         margin-bottom: 1.5rem;
         letter-spacing: 1px;
     }
+    .hero-status {
+        font-size: 1.25rem;
+        font-weight: 400;
+    }
     
     .hero-subtitle {
         font-size: 1rem;
         padding: 0 1rem;
+    }
+    
+    .hero-subtitle-line2 {
+        display: block;
     }
     
     .hero-content {
