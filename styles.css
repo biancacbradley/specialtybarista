@@ -151,6 +151,13 @@ body {
     letter-spacing: -8px;
 }
 
+.hero-status {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #FAFAFA;
+    margin-bottom: 2rem;
+}
 .hero-subtitle {
     font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
