@@ -1,8 +1,20 @@
 const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  // Enable CORS - use specific domain in production
+  const allowedOrigins = [
+    'https://specialtybarista.vercel.app',
+    'https://specialtybarista.com',
+    'https://www.specialtybarista.com',
+    'http://localhost:3000',
+    'http://localhost:8000'
+  ];
+  
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -22,9 +34,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Configure your email transporter
-    const transporter = nodemailer.createTransporter({
-      service: 'gmail', // You can change this to your preferred email service
+    // Configure your email transporter with explicit SMTP settings for better Vercel compatibility
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true, // Use SSL
       auth: {
         user: process.env.EMAIL_USER, // Your email
         pass: process.env.EMAIL_PASS, // Your app password (not regular password)
@@ -49,7 +63,7 @@ export default async function handler(req, res) {
         <div style="margin: 20px 0;">
           <h3 style="color: #333;">Message:</h3>
           <div style="background-color: #fff; padding: 15px; border-left: 4px solid #007cba; margin: 10px 0;">
-            ${message.replace(/\n/g, '<br>')}
+            ${String(message).replace(/\n/g, '<br>')}
           </div>
         </div>
         <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
